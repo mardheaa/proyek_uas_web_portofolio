@@ -191,13 +191,13 @@ app.post("/api/login", authLimiter, async (req, res) => {
       return res.status(400).json({ error: validationError });
     }
 
-    // Query database
+    //Query database
     const [rows] = await db.query(
       "SELECT id, email, username, password FROM tbl_users WHERE email = ? OR username = ?",
       [loginInput.toLowerCase().trim(), loginInput.toLowerCase().trim()],
     );
 
-    // Cek user exists
+    //Cek user exists
     if (rows.length === 0) {
       return res
         .status(401)
@@ -206,7 +206,7 @@ app.post("/api/login", authLimiter, async (req, res) => {
 
     const user = rows[0];
 
-    // Verify password
+    // Verifikasi password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res
