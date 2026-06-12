@@ -3,7 +3,9 @@
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
     "multer": "^2.1.1",
     "mysql2": "^3.22.0",
     "nodemailer": "^8.0.5"
