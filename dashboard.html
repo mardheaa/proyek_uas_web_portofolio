@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - Portofolio Dhedhea</title>
+  
+  <!-- Bootstrap 5 & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --biru-tua: #0A1931;
+      --biru-sedang: #13315C;
+      --biru-aksen: #2563EB;
+      --biru-glow: rgba(37, 99, 235, 0.4);
+      --putih: #FFFFFF;
+      --putih-glass: rgba(255, 255, 255, 0.92);
+      --bg-gradient-start: #0A1931;
+      --bg-gradient-mid: #1E3A5F;
+      --bg-gradient-end: #0F2545;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ✨ Animated Background */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ✨ Floating Particles */
+    .particles {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+      opacity: 0.6;
+    }
+    .particle:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; width: 6px; height: 6px; }
+    .particle:nth-child(2) { left: 20%; animation-duration: 18s; animation-delay: 2s; }
+    .particle:nth-child(3) { left: 35%; animation-duration: 22s; animation-delay: 4s; width: 5px; height: 5px; }
+    .particle:nth-child(4) { left: 50%; animation-duration: 30s; animation-delay: 1s; }
+    .particle:nth-child(5) { left: 65%; animation-duration: 19s; animation-delay: 3s; width: 7px; height: 7px; }
+    .particle:nth-child(6) { left: 80%; animation-duration: 24s; animation-delay: 5s; }
+    .particle:nth-child(7) { left: 90%; animation-duration: 21s; animation-delay: 0s; width: 5px; height: 5px; }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+    }
+
+    /* ✨ Glassmorphism Card */
+    .welcome-card {
+      background: var(--putih-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 50px 40px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 32px 64px -16px rgba(10, 25, 49, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* ✨ Decorative Glow Ring */
+    .welcome-card::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: linear-gradient(135deg, transparent, var(--biru-glow), transparent);
+      border-radius: 26px;
+      z-index: -1;
+      animation: glowRotate 8s linear infinite;
+      opacity: 0.6;
+    }
+    @keyframes glowRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ✨ Icon dengan Glow */
+    .welcome-icon {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, var(--biru-tua), var(--biru-aksen));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2.2rem;
+      color: var(--putih);
+      position: relative;
+      box-shadow: 
+        0 8px 25px var(--biru-glow),
+        0 0 0 4px rgba(255,255,255,0.1);
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .welcome-icon::after {
+      content: '';
+      position: absolute;
+      width: 120%; height: 120%;
+      background: radial-gradient(circle, var(--biru-glow) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+      opacity: 0.5;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.8); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.2; }
+    }
+
+    /* ✨ Typography */
+    .welcome-title {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--biru-tua);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .welcome-subtitle {
+      color: #475569;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .user-name {
+      color: var(--biru-aksen);
+      font-weight: 700;
+      font-size: 1.4rem;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--biru-aksen), #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ✨ Modern Button */
+    .btn-enter {
+      background: linear-gradient(135deg, var(--biru-tua), var(--biru-sedang));
+      color: var(--putih);
+      border: none;
+      padding: 14px 48px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(10, 25, 49, 0.3);
+    }
+    .btn-enter::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-enter:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(10, 25, 49, 0.45);
+      background: linear-gradient(135deg, var(--biru-sedang), var(--biru-aksen));
+    }
+    .btn-enter:hover::before {
+      left: 100%;
+    }
+    .btn-enter:active {
+      transform: translateY(-1px);
+    }
+
+    /* ✨ Secondary Button */
+    .btn-logout {
+      background: transparent;
+      color: #64748B;
+      border: 1px solid #E2E8F0;
+      padding: 10px 24px;
+      border-radius: 12px;
+      margin-top: 16px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-logout:hover {
+      background: #F8FAFC;
+      color: var(--biru-tua);
+      border-color: var(--biru-aksen);
+      transform: translateY(-1px);
+    }
+
+    /* ✨ Decorative Elements */
+    .deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--biru-glow) 0%, transparent 70%);
+      z-index: 1;
+      opacity: 0.3;
+      animation: floatDeco 20s infinite linear;
+    }
+    .deco-1 { width: 300px; height: 300px; top: -100px; right: -100px; animation-delay: 0s; }
+    .deco-2 { width: 200px; height: 200px; bottom: -50px; left: -50px; animation-delay: -10s; }
+    @keyframes floatDeco {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -20px) scale(1.05); }
+      66% { transform: translate(-15px, 15px) scale(0.95); }
+    }
+
+    /* ✨ Stats Row (Optional) */
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 28px 0 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      background: rgba(241, 245, 249, 0.6);
+      padding: 12px 18px;
+      border-radius: 12px;
+      min-width: 100px;
+      border: 1px solid rgba(203, 213, 225, 0.4);
+    }
+    .stat-number {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--biru-tua);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: #64748B;
+    }
+
+    /* ✨ Footer */
+    .footer-note {
+      margin-top: 24px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ✨ Responsive */
+    @media (max-width: 576px) {
+      .welcome-card { padding: 40px 28px; }
+      .welcome-title { font-size: 1.5rem; }
+      .welcome-subtitle { font-size: 1.05rem; }
+      .btn-enter { padding: 13px 32px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✨ Animated Background Particles -->
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- ✨ Decorative Floating Shapes -->
+  <div class="deco-circle deco-1"></div>
+  <div class="deco-circle deco-2"></div>
+
+  <!-- ✨ Welcome Card -->
+  <div class="welcome-card">
+    
+    <!-- Animated Icon -->
+    <div class="welcome-icon">
+      <i class="bi bi-stars"></i>
+    </div>
+    
+    <!-- Welcome Text -->
+    <h1 class="welcome-title">Selamat Datang!</h1>
+    <p class="welcome-subtitle">
+      Halo, <span class="user-name" id="userName">Dhedhea</span>!<br>
+      Senang kamu kembali di web portofolio saya.
+    </p>
+    
+    <!-- Optional Stats (bisa dihapus jika tidak perlu) -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number" id="projectCount">4</div>
+        <div class="stat-label">Proyek</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="activityCount">12</div>
+        <div class="stat-label">Kegiatan</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">🎓</div>
+        <div class="stat-label">UPITRA</div>
+      </div>
+    </div>
+    
+    <!-- Primary CTA Button -->
+    <button class="btn-enter" onclick="enterPortfolio()">
+      <i class="bi bi-compass me-2"></i>Jelajahi Portofolio
+    </button>
+    
+    <!-- Secondary Logout Button -->
+    <button class="btn-logout" onclick="logout()">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </button>
+    
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer-note">
+    © 2026 Portofolio Mardhea • Universitas Pignatelli Triputra (UPITRA)
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // 🔒 Session Check
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      window.location.href = 'index.html';
+    } else {
+      const displayName = user.username || user.email?.split('@')[0] || 'Dhedhea';
+      document.getElementById('userName').textContent = displayName;
+    }
+
+    // 🚀 Navigate to Portfolio
+    function enterPortfolio() {
+      // Add subtle click animation
+      const btn = document.querySelector('.btn-enter');
+      btn.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        window.location.href = 'profil.html';
+      }, 150);
+    }
+
+    // 🚪 Logout Function
+    function logout() {
+      if (confirm('Yakin ingin keluar?')) {
+        localStorage.removeItem('user');
+        window.location.href = 'index.html';
+      }
+    }
+
+    // ✨ Optional: Animate stats on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const stats = document.querySelectorAll('.stat-number');
+      stats.forEach((stat, i) => {
+        if (!isNaN(stat.textContent)) {
+          const target = parseInt(stat.textContent);
+          let count = 0;
+          const increment = target / 20;
+          const timer = setInterval(() => {
+            count += increment;
+            if (count >= target) {
+              stat.textContent = target;
+              clearInterval(timer);
+            } else {
+              stat.textContent = Math.floor(count);
+            }
+          }, 50 * i);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

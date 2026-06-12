@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Portofolio Saya</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    
+    <style>
+      :root {
+        --biru-tua: #0A1931;
+        --biru-sedang: #13315C;
+        --biru-aksen: #2563EB;
+        --putih: #FFFFFF;
+        --bg: #F0F4F8;
+      }
+      body {
+        background: linear-gradient(145deg, #E2E8F0 0%, #F8FAFC 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        padding: 20px;
+      }
+      .auth-card {
+        background: var(--putih);
+        border-radius: 16px;
+        box-shadow: 0 12px 35px rgba(10, 25, 49, 0.08);
+        overflow: hidden;
+        max-width: 440px;
+        width: 100%;
+      }
+      .auth-header {
+        background: var(--biru-tua);
+        color: var(--putih);
+        padding: 28px 24px;
+        text-align: center;
+        position: relative;
+      }
+      .auth-header::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: var(--putih);
+        border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      }
+      .header-icon {
+        width: 64px;
+        height: 64px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px;
+        font-size: 1.8rem;
+      }
+      .auth-body { padding: 24px; }
+      .nav-pills .nav-link {
+        color: var(--biru-sedang);
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 10px 16px;
+        background: #F1F5F9;
+        margin: 0 4px;
+      }
+      .nav-pills .nav-link.active {
+        background: var(--biru-tua);
+        color: var(--putih);
+        box-shadow: 0 4px 12px rgba(10, 25, 49, 0.2);
+      }
+      .form-control {
+        border-radius: 8px;
+        padding: 10px 14px;
+        border: 1px solid #CBD5E1;
+      }
+      .form-control:focus {
+        border-color: var(--biru-aksen);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+      .input-group-text {
+        background: #F8FAFC;
+        border-radius: 8px 0 0 8px;
+        border: 1px solid #CBD5E1;
+        border-right: none;
+        color: var(--biru-sedang);
+      }
+      .input-group .form-control {
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+      }
+      .btn-toggle-password {
+        border-radius: 0 8px 8px 0;
+        border-left: none;
+        background: #F8FAFC;
+        border: 1px solid #CBD5E1;
+        color: var(--biru-sedang);
+        transition: all 0.2s;
+      }
+      .btn-toggle-password:hover {
+        background: #E2E8F0;
+        color: var(--biru-tua);
+      }
+      .btn-primary {
+        background: var(--biru-tua);
+        border: none;
+        padding: 11px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.25s ease;
+      }
+      .btn-primary:hover {
+        background: var(--biru-sedang);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 15px rgba(10, 25, 49, 0.25);
+      }
+      .text-link {
+        color: var(--biru-aksen);
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .text-link:hover { text-decoration: underline; }
+      .view-section { display: none; animation: fadeIn 0.3s ease; }
+      .view-section.active { display: block; }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .footer-note {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 0.85rem;
+        color: #64748B;
+      }
+      .password-hint {
+        font-size: 0.8rem;
+        color: #64748B;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="header-icon"><i class="bi bi-person-circle"></i></div>
+        <h4 class="mb-1 fw-bold">Portofolio Saya</h4>
+        <p class="mb-0 opacity-75">Universitas Pignateli Triputra (UPITRA)</p>
+      </div>
+
+      <div class="auth-body">
+        <!-- Alert Container -->
+        <div id="authAlert" class="alert d-none rounded-3" role="alert"></div>
+
+        <!-- VIEW: Login & Register (Tabs) -->
+        <div id="viewAuth" class="view-section active">
+          <ul class="nav nav-pills mb-4 justify-content-center gap-2" id="authTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login-pane" type="button">Login</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="register-tab" data-bs-toggle="pill" data-bs-target="#register-pane" type="button">Daftar</button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="authTabContent">
+            
+            <!-- ========== LOGIN FORM ========== -->
+            <div class="tab-pane fade show active" id="login-pane" role="tabpanel">
+              <form id="loginForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Email atau Username</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control" id="loginInput" placeholder="Masukkan email atau username" required>
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Password</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Masukkan password" required>
+                    <button class="btn btn-toggle-password" type="button" onclick="togglePassword('loginPassword', this)" title="Tampilkan/Sembunyikan Password">
+                      <i class="bi bi-eye-fill"></i>
+                    </button>
+                  </div>
+                  <small class="password-hint">Minimal 8 karakter</small>
+                </div>
+                
+                <div class="d-grid mb-3">
+                  <button type="submit" class="btn btn-primary">Masuk</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- ========== REGISTER FORM ========== -->
+            <div class="tab-pane fade" id="register-pane" role="tabpanel">
+              <form id="registerForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Email Kampus</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control" id="regEmail" placeholder="mahasiswa@upitra.ac.id" required>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Username</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-badge-fill"></i></span>
+                    <input type="text" class="form-control" id="regUsername" placeholder="4-20 karakter (huruf/angka/_)" required>
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Password</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" class="form-control" id="regPassword" placeholder="Minimal 8 karakter" required>
+                    <button class="btn btn-toggle-password" type="button" onclick="togglePassword('regPassword', this)" title="Tampilkan/Sembunyikan Password">
+                      <i class="bi bi-eye-fill"></i>
+                    </button>
+                  </div>
+                  <small class="password-hint">Gunakan kombinasi huruf, angka, dan simbol</small>
+                </div>
+                
+                <div class="d-grid mb-3">
+                  <button type="submit" class="btn btn-primary">Buat Akun</button>
+                </div>
+                <div class="text-center">
+                  <small>Sudah punya akun? <a class="text-link" onclick="switchTab('login-tab')">Login di sini</a></small>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="footer-note">© 2026 Portofolio Pribadi - Tugas STQA</div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+      const API = "http://localhost:3000/api";
+      const alertBox = document.getElementById("authAlert");
+
+      // 🔓 Toggle Show/Hide Password
+      function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icon = btn.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.remove('bi-eye-fill');
+          icon.classList.add('bi-eye-slash-fill');
+        } else {
+          input.type = 'password';
+          icon.classList.remove('bi-eye-slash-fill');
+          icon.classList.add('bi-eye-fill');
+        }
+      }
+
+      // 📢 Show Alert Message
+      function showAlert(msg, type) {
+        alertBox.className = `alert alert-${type} rounded-3`;
+        alertBox.textContent = msg;
+        alertBox.classList.remove("d-none");
+        setTimeout(() => alertBox.classList.add("d-none"), 6000);
+      }
+
+      // 🔄 Switch Tabs inside Auth View
+      function switchTab(tabId) {
+        const tabEl = document.getElementById(tabId);
+        const tab = new bootstrap.Tab(tabEl);
+        tab.show();
+      }
+
+      // ==================== API HANDLERS ====================
+
+      // 🔐 LOGIN
+      document.getElementById("loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+          const res = await fetch(`${API}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              loginInput: document.getElementById("loginInput").value.trim(),
+              password: document.getElementById("loginPassword").value,
+            }),
+          });
+          const data = await res.json();
+          showAlert(data.message || data.error, res.ok ? "success" : "danger");
+          if (res.ok) {
+            localStorage.setItem("user", JSON.stringify(data));
+            window.location.href = "dashboard.html"; // Redirect ke halaman portofolio
+          }
+        } catch {
+          showAlert("Gagal terhubung ke server", "danger");
+        }
+      });
+
+      // 📝 REGISTER
+      document.getElementById("registerForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+          const res = await fetch(`${API}/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: document.getElementById("regEmail").value.trim(),
+              username: document.getElementById("regUsername").value.trim(),
+              password: document.getElementById("regPassword").value,
+            }),
+          });
+          const data = await res.json();
+          showAlert(data.message || data.error, res.ok ? "success" : "danger");
+          if (res.ok) setTimeout(() => switchTab("login-tab"), 1500);
+        } catch {
+          showAlert("Gagal terhubung ke server", "danger");
+        }
+      });
+    </script>
+  </body>
+</html>

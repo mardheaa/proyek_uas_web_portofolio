@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Saya</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --biru-tua: #0A1931;
+      --biru-sedang: #13315C;
+      --biru-aksen: #2563EB;
+      --biru-gradient-1: #1e3a8a;
+      --biru-gradient-2: #3b82f6;
+      --biru-glow: rgba(37, 99, 235, 0.15);
+      --putih: #FFFFFF;
+      --putih-glass: rgba(255, 255, 255, 0.95);
+      --bg: #F0F4F8;
+      --text: #1E293B;
+      --text-muted: #64748B;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* NAVBAR */
+    .navbar {
+      background: var(--biru-tua);
+      box-shadow: 0 4px 20px rgba(10, 25, 49, 0.15);
+      padding: 12px 0;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--putih) !important;
+      font-size: 1.3rem;
+    }
+    .nav-link {
+      color: rgba(255,255,255,0.85) !important;
+      font-weight: 500;
+      margin: 0 8px;
+      padding: 8px 16px !important;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--putih) !important;
+      background: rgba(255,255,255,0.1);
+    }
+    .btn-logout {
+      background: rgba(255,255,255,0.15);
+      color: var(--putih);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover {
+      background: rgba(255,255,255,0.25);
+      color: var(--putih);
+      transform: translateY(-1px);
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      background: linear-gradient(135deg, var(--biru-tua) 0%, var(--biru-sedang) 100%);
+      color: var(--putih);
+      padding: 70px 0 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+      animation: pulse 10s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.3; }
+    }
+    .profile-img {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+      object-fit: cover;
+      background: var(--putih);
+      position: relative;
+      z-index: 2;
+    }
+    .hero-section h1 {
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-section p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* SLIDESHOW */
+    .carousel-item img {
+      height: 450px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+    .carousel-caption {
+      background: rgba(10, 25, 49, 0.85);
+      border-radius: 12px;
+      padding: 25px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-weight: 800;
+      color: var(--biru-tua);
+      margin: 60px 0 35px;
+      padding-bottom: 14px;
+      border-bottom: 4px solid var(--biru-aksen);
+      display: inline-block;
+      position: relative;
+      font-size: 1.8rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--biru-aksen);
+      border-radius: 2px;
+    }
+
+    /* PROJECT CARDS (STATIC) */
+    .project-card {
+      background: var(--putih-glass);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(10, 25, 49, 0.1);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(203, 213, 225, 0.4);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(10, 25, 49, 0.2);
+    }
+    .project-img {
+      height: 200px;
+      background: linear-gradient(135deg, var(--biru-gradient-1), var(--biru-gradient-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--putih);
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-img::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1));
+    }
+    .project-body {
+      padding: 28px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-body h4 {
+      font-weight: 700;
+      color: var(--biru-tua);
+      margin-bottom: 14px;
+      font-size: 1.3rem;
+    }
+    .project-body p {
+      color: var(--text);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .project-body .badge {
+      margin: 4px;
+      padding: 7px 14px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      border-radius: 8px;
+    }
+
+    /* DYNAMIC ACTIVITY CARDS (BESAR & PENUH) */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 32px;
+      margin-bottom: 50px;
+    }
+    .activity-card {
+      background: var(--putih-glass);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(10, 25, 49, 0.1);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(203, 213, 225, 0.4);
+      display: flex;
+      flex-direction: column;
+    }
+    .activity-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 20px 50px rgba(10, 25, 49, 0.18);
+    }
+    .activity-img {
+      height: 320px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, var(--biru-gradient-1), var(--biru-gradient-2));
+    }
+    .activity-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .activity-card:hover .activity-img img {
+      transform: scale(1.08);
+    }
+    .activity-img-placeholder {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--putih);
+      font-size: 5rem;
+      background: linear-gradient(135deg, var(--biru-gradient-1), var(--biru-gradient-2));
+    }
+    .activity-body {
+      padding: 28px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .activity-type {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .type-Kegiatan { 
+      background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+      color: white; 
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+    .type-Sertifikat { 
+      background: linear-gradient(135deg, #22c55e, #16a34a); 
+      color: white;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    }
+    .type-Pengalaman { 
+      background: linear-gradient(135deg, #f59e0b, #d97706); 
+      color: white;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+    .activity-title {
+      font-weight: 800;
+      color: var(--biru-tua);
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+      line-height: 1.3;
+    }
+    .activity-meta {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .activity-meta i {
+      color: var(--biru-aksen);
+      margin-right: 4px;
+    }
+    .activity-desc {
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-top: auto;
+    }
+
+    /* FILTER BUTTONS */
+    .filter-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 10px 24px;
+      border: 2px solid var(--biru-aksen);
+      background: var(--putih);
+      color: var(--biru-aksen);
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 0.95rem;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--biru-aksen);
+      color: var(--putih);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    /* LOADING & EMPTY STATE */
+    .loading-state, .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-muted);
+    }
+    .loading-spinner {
+      width: 50px; height: 50px;
+      border: 5px solid var(--biru-glow);
+      border-top-color: var(--biru-aksen);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 25px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty-state i {
+      font-size: 5rem;
+      margin-bottom: 20px;
+      opacity: 0.4;
+      color: var(--biru-aksen);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--biru-tua);
+      color: var(--putih);
+      padding: 35px 0;
+      margin-top: 70px;
+      text-align: center;
+    }
+    .footer a { color: var(--biru-aksen); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-section { padding: 50px 0 30px; }
+      .carousel-item img { height: 280px; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.5rem; }
+      .activity-img { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-person-circle me-2"></i>Portofolio Saya
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="profil.html">Profil</a></li>
+          <li class="nav-item"><a class="nav-link" href="crud.html">Manage Journey</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item ms-3"><button class="btn btn-logout" onclick="logout()"><i class="bi bi-box-arrow-right me-1"></i>Logout</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="container">
+      <img src="https://static.vecteezy.com/ti/gratis-vektor/p1/20326616-mrh-brief-logo-design-auf-weiss-hintergrund-mrh-kreativ-kreis-brief-logo-konzept-mrh-brief-design-vektor.jpg" alt="Profile" class="profile-img">
+      <h1>Mardhea Risna Harsadi</h1>
+      <p class="mb-2">Mahasiswi Universitas Pignatelli Triputra (UPITRA)</p>
+      <p class="mb-0 opacity-75">Sistem Informasi | Sains dan Teknologi</p>
+    </div>
+  </section>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    
+    <!-- SLIDESHOW -->
+    <h3 class="section-title">📸 Dokumentasi Proyek</h3>
+    <div id="projectCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://dicoding-assets.sgp1.cdn.digitaloceanspaces.com/blog/wp-content/uploads/2025/06/types-of-web-development-services.jpg"  " class="d-block w-100" alt="Project 1">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Web Development</h5>
+            <p>Membuat aplikasi web modern</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="https://media.licdn.com/dms/image/v2/D5612AQEbF2g6kQM__g/article-cover_image-shrink_600_2000/B56ZmJ5V2AI4AQ-/0/1758955139244?e=2147483647&v=beta&t=DAw5hSgSQRGrD3gVX2i9YXNb_y7xE1Rgy_2v0tjL24Q" class="d-block w-100" alt="Project 2">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Database Management</h5>
+            <p>Desain dan implementasi basis data untuk pembuatan website</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="https://dibimbing-cdn.sgp1.cdn.digitaloceanspaces.com/media-strapi/235b7885b3888e2517758e4ee095bea2.webp" class="d-block w-100" alt="Project 3">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Software Testing</h5>
+            <p>Quality assurance dan testing untuk memastikan kualitas aplikasi</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <!-- PROJECT EXPLANATIONS (STATIC) -->
+    <h3 class="section-title">💼 Proyek Yang Pernah Dibuat</h3>
+    <div class="row g-4">
+      
+      <!-- PROJECT 1 -->
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-img">
+            <i class="bi bi-tools"></i>
+          </div>
+          <div class="project-body">
+            <h4>1. Website Portofolio</h4>
+            <p>
+              Sebuah website portofolio yang menampilkan kumpulan kegiatan, pengalaman, keahlian dan project untuk membangun personal branding saya.
+            </p>
+            <p><strong>Teknologi yang digunakan:</strong></p>
+            <div>
+              <span class="badge bg-primary">Node.js</span>
+              <span class="badge bg-secondary">Express.js</span>
+              <span class="badge bg-info text-dark">MySQL</span>
+              <span class="badge bg-success">Bootstrap 5</span>
+              <span class="badge bg-warning text-dark">Bcrypt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-img">
+            <i class="bi bi-cart-check"></i>
+          </div>
+          <div class="project-body">
+            <h4>2. Aplikasi Management Gym</h4>
+            <p>
+              Aplikasi Management Gym untuk mengelola data member, jadwal latihan, pembayaran, dan laporan bulanan secara terintegrasi.
+            </p>
+            <p><strong>Teknologi yang digunakan:</strong></p>
+            <div>
+              <span class="badge bg-primary">JavaScript</span>
+              <span class="badge bg-success">XAMPP</span>
+              <span class="badge bg-info text-dark">MySQL</span>
+              <span class="badge bg-secondary">Node.js</span>
+              <span class="badge bg-danger">VS Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-img">
+            <i class="bi bi-phone"></i>
+          </div>
+          <div class="project-body">
+            <h4>3. Sistem IoT Pendeteksi Longsor</h4>
+            <p>
+              Sistem IoT berbasis sensor untuk mendeteksi potensi longsor secara real-time. Data dikirim ke cloud dan dapat dipantau melalui dashboard web.
+            </p>
+            <p><strong>Teknologi yang digunakan:</strong></p>
+            <div>
+              <span class="badge bg-primary">Arduino IDE</span>
+              <span class="badge bg-info text-dark">Firebase</span>
+              <span class="badge bg-success">Node.js</span>
+              <span class="badge bg-warning text-dark">Sensor Module</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 4 -->
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-img">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <div class="project-body">
+            <h4>4. Desain Web PintarPlus di Figma</h4>
+            <p>
+              Sebuah UI/UX design untuk merancang aplikasi edukasi PintarPlus dengan pendekatan user-centered design dan prototyping interaktif.
+            </p>
+            <p><strong>Tools yang digunakan:</strong></p>
+            <div>
+              <span class="badge bg-primary">Figma</span>
+              <span class="badge bg-info text-dark">Wireframing</span>
+              <span class="badge bg-success">Prototyping</span>
+              <span class="badge bg-secondary">User Research</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DYNAMIC ACTIVITIES FROM CRUD (BESAR & PENUH) -->
+    <h3 class="section-title">🎯 Kegiatan & Pengalaman</h3>
+    
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+      <button class="filter-btn active" onclick="filterActivities('all')">Semua</button>
+      <button class="filter-btn" onclick="filterActivities('Kegiatan')">Kegiatan</button>
+      <button class="filter-btn" onclick="filterActivities('Sertifikat')">Sertifikat</button>
+      <button class="filter-btn" onclick="filterActivities('Pengalaman')">Pengalaman</button>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Memuat data kegiatan...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <i class="bi bi-inbox"></i>
+      <h5 class="mb-2">Belum Ada Kegiatan</h5>
+      <p class="mb-3">Mulai tambahkan kegiatan, sertifikat, atau pengalamanmu di halaman Riwayat Kegiatan.</p>
+      <a href="crud.html" class="btn btn-primary" style="background: var(--biru-tua); border: none; padding: 12px 28px;">
+        <i class="bi bi-plus-circle me-1"></i>Tambah Kegiatan
+      </a>
+    </div>
+
+    <!-- Activities Grid (Dynamic - Besar) -->
+    <div id="activitiesGrid" class="activities-grid"></div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <h5 class="mb-2">Mardhea Risna Harsadi</h5>
+      <p class="mb-1 opacity-75">Mahasiswi Universitas Pignatelli Triputra (UPITRA)</p>
+      <p class="mb-2 opacity-75">Email: <a href="mailto:email@upitra.ac.id">mardhea@upitra.ac.id</a> | GitHub: <a href="#">github.com/username</a></p>
+      <small class="opacity-50">© 2026 - Dibuat untuk UAS Software Testing & Quality Assurance</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 🔒 Session Check
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) window.location.href = 'index.html';
+
+    const API = 'http://localhost:3000/api/activities';
+    let allActivities = [];
+
+    // 🎨 Get badge class based on type
+    function getTypeClass(jenis) {
+      return `type-${jenis}`;
+    }
+
+    // 🖼️ Get image URL or placeholder
+    function getImageUrl(foto) {
+      if (foto) return `http://localhost:3000/uploads/${foto}`;
+      return null;
+    }
+
+    // 📦 Render activities to grid (BESAR & PENUH)
+    function renderActivities(activities) {
+      const grid = document.getElementById('activitiesGrid');
+      const loading = document.getElementById('loadingState');
+      const empty = document.getElementById('emptyState');
+
+      loading.style.display = 'none';
+
+      if (activities.length === 0) {
+        empty.style.display = 'block';
+        grid.innerHTML = '';
+        return;
+      }
+
+      empty.style.display = 'none';
+      grid.innerHTML = activities.map(item => {
+        const imageUrl = getImageUrl(item.foto);
+        return `
+          <div class="activity-card">
+            <div class="activity-img">
+              ${imageUrl 
+                ? `<img src="${imageUrl}" alt="${item.nama_kegiatan}" onerror="this.parentElement.innerHTML='<div class=\\'activity-img-placeholder\\'><i class=\\'bi bi-image\\'></i></div>'">`
+                : `<div class="activity-img-placeholder"><i class="bi bi-calendar-event"></i></div>`
+              }
+            </div>
+            <div class="activity-body">
+              <span class="activity-type ${getTypeClass(item.jenis)}">${item.jenis}</span>
+              <h4 class="activity-title">${item.nama_kegiatan}</h4>
+              <div class="activity-meta">
+                <span><i class="bi bi-building"></i>${item.instansi}</span>
+                <span><i class="bi bi-calendar3"></i>${item.tahun}</span>
+              </div>
+              <p class="activity-desc">${item.deskripsi}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 🔄 Fetch activities from API
+    async function loadActivities() {
+      try {
+        document.getElementById('loadingState').style.display = 'block';
+        const res = await fetch(API);
+        if (!res.ok) throw new Error('Gagal mengambil data');
+        allActivities = await res.json();
+        filterActivities('all');
+      } catch (err) {
+        console.error('Error loading activities:', err);
+        document.getElementById('loadingState').innerHTML = 
+          '<p class="text-danger">❌ Gagal memuat data. Pastikan server berjalan.</p>';
+      }
+    }
+
+    // 🔍 Filter activities by type
+    function filterActivities(type) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event?.target?.classList.add('active');
+
+      const filtered = type === 'all' 
+        ? allActivities 
+        : allActivities.filter(item => item.jenis === type);
+      
+      renderActivities(filtered);
+    }
+
+    // 🚪 Logout function
+    function logout() {
+      localStorage.removeItem('user');
+      window.location.href = 'index.html';
+    }
+
+    // 🚀 Load on page ready
+    document.addEventListener('DOMContentLoaded', loadActivities);
+  </script>
+</body>
+</html>
